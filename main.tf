@@ -26,8 +26,9 @@ resource "aws_subnet" "public_subnets" {
   availability_zone       = each.value["availability_zone"]
   map_public_ip_on_launch = each.value["map_public_ip_on_launch"]
   tags                    = merge(var.tags, {
-    Name                  = each.value["name"]
+    Name                  = each.key
     Tier                  = each.value["tier"]
+    "kubernetes.io/role/elb" = "1"
   })
 }
 
@@ -38,8 +39,9 @@ resource "aws_subnet" "private_subnets" {
   availability_zone       = each.value["availability_zone"]
   map_public_ip_on_launch = each.value["map_public_ip_on_launch"]
   tags                    = merge(var.tags, {
-    Name                  = each.value["name"]
-    Tier                  = each.value["tier"]
+    Name                              = each.key
+    Tier                              = each.value["tier"]
+    "kubernetes.io/role/internal-elb" = "1"
   })
 }
 
@@ -52,8 +54,8 @@ resource "aws_internet_gateway" "igw" {
 }
 
 resource "aws_eip" "nat_gw_eip" {
-  count = var.enable_nat_gateway ? 1 : 0
-  vpc   = true
+  count  = var.enable_nat_gateway ? 1 : 0
+  domain = "vpc"
   tags          = merge(var.tags, {
     Name        = "${var.vpc_name}-NATGW-EIP"
   })
