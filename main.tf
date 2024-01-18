@@ -28,6 +28,7 @@ resource "aws_subnet" "public_subnets" {
   tags                    = merge(var.tags, {
     Name                  = each.key
     Tier                  = each.value["tier"]
+    "kubernetes.io/role/elb" = "1"
   })
 }
 
@@ -38,8 +39,9 @@ resource "aws_subnet" "private_subnets" {
   availability_zone       = each.value["availability_zone"]
   map_public_ip_on_launch = each.value["map_public_ip_on_launch"]
   tags                    = merge(var.tags, {
-    Name                  = each.key
-    Tier                  = each.value["tier"]
+    Name                              = each.key
+    Tier                              = each.value["tier"]
+    "kubernetes.io/role/internal-elb" = "1"
   })
 }
 
