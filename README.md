@@ -13,7 +13,7 @@ You can use versioned release tags to ensure that your project using this module
 <b>Repo latest commit</b><br>
 ```
 module "vpc" {
-  source = "github.com/Medality-Health/terraform-aws-vpc"
+  source = "github.com/teokyllc/terraform-aws-vpc"
   ...
 ```
 <br>
@@ -22,7 +22,7 @@ module "vpc" {
 
 ```
 module "vpc" {
-  source = "github.com/Medality-Health/terraform-aws-vpc?ref=1.0.0"
+  source = "github.com/teokyllc/terraform-aws-vpc?ref=1.0"
   ...
 ```
 <br>
@@ -32,7 +32,7 @@ This is an example of using this module to create a VPC.<br>
 
 ```
 module "vpc" {
-  source                  = "github.com/Medality-Health/terraform-aws-vpc?ref=1.0.0"
+  source                  = "github.com/teokyllc/terraform-aws-vpc?ref=1.0"
   region                  = "us-east-2"
   vpc_name                = "Example-VPC"
   cidr_block              = "10.0.0.0/16"
@@ -132,7 +132,7 @@ module "vpc" {
 <br><br>
 Module can be tested locally:<br>
 ```
-git clone https://github.com/Medality-Health/terraform-aws-vpc.git
+git clone https://github.com/teokyllc/terraform-aws-vpc.git
 cd terraform-aws-vpc
 
 cat <<EOF > vpc.auto.tfvars
