@@ -26,7 +26,7 @@ resource "aws_subnet" "public_subnets" {
   availability_zone       = each.value["availability_zone"]
   map_public_ip_on_launch = each.value["map_public_ip_on_launch"]
   tags                    = merge(var.tags, {
-    Name                  = each.value["name"]
+    Name                  = each.key
     Tier                  = each.value["tier"]
   })
 }
@@ -38,7 +38,7 @@ resource "aws_subnet" "private_subnets" {
   availability_zone       = each.value["availability_zone"]
   map_public_ip_on_launch = each.value["map_public_ip_on_launch"]
   tags                    = merge(var.tags, {
-    Name                  = each.value["name"]
+    Name                  = each.key
     Tier                  = each.value["tier"]
   })
 }
