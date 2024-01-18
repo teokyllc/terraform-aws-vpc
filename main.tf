@@ -52,8 +52,8 @@ resource "aws_internet_gateway" "igw" {
 }
 
 resource "aws_eip" "nat_gw_eip" {
-  count = var.enable_nat_gateway ? 1 : 0
-  vpc   = true
+  count  = var.enable_nat_gateway ? 1 : 0
+  domain = "vpc"
   tags          = merge(var.tags, {
     Name        = "${var.vpc_name}-NATGW-EIP"
   })
